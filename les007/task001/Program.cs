@@ -1,4 +1,4 @@
-﻿// В двумерном массиве заменить элементы, у которых оба индекса чётные на их квадраты
+﻿// Написать программу, упорядочивания по убыванию элементы каждой строки двумерной массива.
 
 void FillMatrix(int[,] array, int min, int max)
 {
@@ -23,31 +23,33 @@ void PrintMatrix(int[,] array)
     }
     Console.WriteLine();
 }
-void FindAndSqElement(int[,] array)
+
+void SortMatrix(int[,] array)
 {
     for (int i = 0; i < array.GetLength(0); i++)
     {
-        if (i % 2 == 0)
+        for (int j = 0; j < array.GetLength(1); j++)
         {
-            for (int j = 0; j < array.GetLength(1); j++)
+
+            for (int k = 0; k < array.GetLength(1); k++)
             {
-                if (j % 2 == 0)
+                if (array[i, j] >= array[i, k])
                 {
-                    array[i, j] = (int)Math.Pow(array[i, j], 2);
+                    int temp = array[i, j];
+                    array[i, j] = array[i, k];
+                    array[i, k] = temp;
                 }
             }
         }
     }
 }
-
 Console.WriteLine("введите m:");
 int m = int.Parse(Console.ReadLine() ?? "0");
-Console.WriteLine("введите n:");
+Console.WriteLine("введите m:");
 int n = int.Parse(Console.ReadLine() ?? "0");
 int[,] matrix = new int[m, n];
-FillMatrix(matrix, 2, 3);
-Console.WriteLine("matrix:");
+FillMatrix(matrix, 0, 10);
 PrintMatrix(matrix);
-FindAndSqElement(matrix);
-Console.WriteLine("matrix after:");
+SortMatrix(matrix);
+Console.WriteLine();
 PrintMatrix(matrix);
